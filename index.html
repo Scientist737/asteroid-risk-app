@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asteroid Risk Assessment</title>
+</head>
+<body>
+    <h1>Welcome to the Asteroid Impact Risk Assessment</h1>
+    <p>This website will analyze asteroid threats using machine learning.</p>
+    <form id="predictionForm">
+        <label for="asteroid-data">Enter Asteroid Data:</label>
+        <input type="text" id="asteroid-data" name="asteroid-data" required>
+        <button type="submit">Predict</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("predictionForm").onsubmit = async function(event) {
+            event.preventDefault();
+            const inputData = document.getElementById("asteroid-data").value;
+            
+            const response = await fetch("https://your-backend-url.com/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ data: inputData })
+            });
+
+            const result = await response.json();
+            document.getElementById("result").innerText = "Prediction: " + result.prediction;
+        };
+    </script>
+</body>
+</html>
